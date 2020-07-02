@@ -3,7 +3,6 @@ import { withRouter } from 'react-router';
 import { withFirebase } from './Firebase/context';
 import * as ROUTES from '../constants/routes';
 import { compose } from 'recompose';
-import { auth } from 'firebase';
 
 export const INITIAL_CONTEXT_STATE = {
     isUserLoggedIn: false,

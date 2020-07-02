@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useState } from 'react';
 import { Card, Button } from '@material-ui/core';
 import { EmailTextField } from '../components/EmailTextField';
 import { PasswordTextField } from '../components/PasswordTextField';

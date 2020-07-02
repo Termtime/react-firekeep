@@ -1,6 +1,5 @@
 import React, { useState, useEffect,} from 'react';
 import { protectedWithAuth } from '../provider/Authentication';
-import { withFirebase } from '../provider/Firebase';
 import { Paper, Fab, CircularProgress} from '@material-ui/core';
 import { Close, Save} from '@material-ui/icons';
 import { HookTheme } from '../constants/theme';

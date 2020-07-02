@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Paper, Fab, Menu, MenuItem, Typography, Backdrop } from '@material-ui/core';
+import { Paper, Fab, Menu, MenuItem, Backdrop } from '@material-ui/core';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { HookTheme } from '../constants/theme';
 import { MoreVert, Save, Close, Delete } from '@material-ui/icons';
@@ -13,10 +13,8 @@ const NoteContainerBase = (props) =>{
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
-    const [currentOriginalTitle, setCurrentOriginalTitle] = useState(props.note.title);
-    const [currentOriginalBody, setCurrentOriginalBody] = useState(props.note.body);
-    const [noteTitle, setNoteTitle] = useState(currentOriginalTitle);
-    const [noteBody, setNoteBody] = useState(currentOriginalBody);
+    const [noteTitle, setNoteTitle] = useState(props.note.title);
+    const [noteBody, setNoteBody] = useState(props.note.body);
     // const [isMenuOpen, setIsMenuOpen] = useState(false);
     const deleteNote= (docId) =>
     {
