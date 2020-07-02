@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Switch, Route } from 'react-router';
+import * as ROUTES from './constants/routes';
+import { TopAppBar } from './components/TopAppBar';
+import { LandingPage } from './pages/LandingPage';
+import { SignInPage } from './pages/SignInPage';
+import { SignUpPage } from './pages/SignUpPage';
+import { HomePage } from './pages/HomePage';
+import { Credits } from './pages/CreditsPage';
+import { PassForgetPage } from './pages/PassForget';
+import {withAuthContextProvider } from './provider/Authentication';
+import { withFirebase } from './provider/Firebase';
+
 
 function App() {
+    
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        <TopAppBar/>
+        <Switch>
+          <Route exact path={ROUTES.LANDING} component={LandingPage}/>
+          <Route path={ROUTES.SIGN_IN} component={SignInPage}/>
+          <Route path={ROUTES.SIGN_UP} component={SignUpPage}/>
+          <Route path={ROUTES.HOME} component={HomePage}/>
+          <Route path={ROUTES.PASSWORD_FORGET} component={PassForgetPage}/>
+          <Route path={ROUTES.CREDITS} component={Credits}/>
+        </Switch>
     </div>
+    
   );
 }
 
-export default App;
+export default withFirebase(withAuthContextProvider(App));

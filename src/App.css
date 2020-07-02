@@ -1,38 +1,98 @@
-.App {
-  text-align: center;
+@import './css/pages/LandingPage.css';
+@import './css/pages/LoginPage.css';
+@import './css/pages/HomePage.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.app{
+  background-color: #131414;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.avatar{
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.avatar-container{
+  margin-right:20px;
+  margin-top:10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.bfc{
+  flex-grow:100;
+}
+
+body{
+  background-color: #131414;
+  color:white;
+  font-family: 'Roboto','sans-serif;';
+}
+.center{
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.credits{
+  display:flex;
+  justify-content:center;
 }
 
-.App-link {
-  color: #61dafb;
+.flex-container{
+  display:flex;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.end{
+  align-items: flex-end;
+  justify-content: flex-end;
 }
+
+.logo{
+  width:40px;
+}
+
+.hideOverflow{
+  overflow: hidden;
+}
+
+.start{
+  justify-content: flex-start;
+}
+
+.space-between{
+  justify-content: space-between;
+}
+
+.stretch{
+  justify-content: stretch;
+}
+.row{
+  display:flex;
+  flex-direction: row;
+}
+
+.column{
+  display:flex;
+  flex-direction: column;
+}
+
+.btn{
+  background-color:steelblue;
+}
+
+.white-text{
+  color:white;
+}
+
+.max-width{
+  width: 100vw;
+}
+
+.max-height{
+  height: 100vh;
+}
+
+.hidden{
+  display: none;
+}
+
+.unselectable{
+  user-select: none;
+}
+

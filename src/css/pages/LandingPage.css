@@ -1,0 +1,26 @@
+.title{
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    width:80%;
+    user-select: none;
+}
+
+.title h1{
+    font-size: 48pt;
+    margin:10;
+}
+.title a{
+    text-decoration: none;
+    color: white;
+    font-style: italic;
+}
+
+.center-text{
+    text-align: center;
+}
+
+.no-style{
+    text-decoration: none;
+    color:black;
+}

@@ -1,0 +1,111 @@
+.fab-right-top-corner{
+    display:flex;
+    align-self:flex-end;
+    position:relative;
+    line-height:0px;
+    margin:0px;
+    padding:0px;
+    bottom: 20px;
+    left:20px;
+}
+
+.fab-right-down-center{
+    display:flex;
+    align-self:center;
+    position:relative;
+    line-height:0px;
+    margin:0px;
+    padding:0px;
+    top: 30px;
+    left:20px;
+}
+.fab-right-down-corner{
+    display:flex;
+    align-self:flex-end;
+    position:relative;
+    line-height:0px;
+    margin:0px;
+    padding:0px;
+    top: 30px;
+    left:20px;
+}
+.note-fab-right-top-corner{
+    display:flex;
+    align-self:flex-end;
+    position:relative;
+    line-height:0px;
+    margin:0px;
+    padding:0px;
+    bottom: 15px;
+    left:15px;
+}
+
+.note-fab-right-down-center{
+    display:flex;
+    align-self:center;
+    position:relative;
+    line-height:0px;
+    margin:0px;
+    padding:0px;
+    top: 30px;
+    left:200px;
+}
+
+.notes-container{
+    padding:16px;
+    color:white;
+}
+
+.note{
+    text-align: start;
+    flex-direction: column;
+    transition-duration: 0.2s;
+    margin-left: 10px;
+    min-height:80px;
+}
+.note-editor{
+    width: 30%;
+    text-align: start;
+    flex-direction: column;
+    transition-duration: 0.2s;
+    margin-left: 10px;
+    min-height:80px;
+}
+
+.note-editor-m{
+    width: 80%;
+    text-align: start;
+    flex-direction: column;
+    transition-duration: 0.2s;
+    margin-left: 10px;
+    min-height:80px;
+}
+.openNote-container{
+    position: absolute;
+    right:50%;
+}
+
+.openNote{
+    position:relative;
+    right:-50%;
+}
+.note .note-fab-right-top-corner{
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s, visibility 0.4s;
+}
+.note:hover .note-fab-right-top-corner{
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.4s, visibility 0.4s;
+}
+.noteTitle{
+    margin-top:-45px;
+    margin-bottom:5px;
+    padding:5px;
+}
+
+.noteBody{
+    margin:1px;
+    padding:5px
+}
