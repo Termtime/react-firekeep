@@ -24,3 +24,7 @@
     text-decoration: none;
     color:black;
 }
+
+.sub-paper{
+    min-height:125px;
+}

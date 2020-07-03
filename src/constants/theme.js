@@ -126,8 +126,9 @@ const InputStyles = {
         },
     },
     loginButton: {
-        color: 'white',
-        background:'dodgerblue',
+        background: 'steelblue',
+        color:'white',
+        textTransform: 'none',
         '&:hover':{
             background:'royalblue'
         },
@@ -135,8 +136,9 @@ const InputStyles = {
         marginBottom:'20px'
     },
     loginButton_M: {
-        color: 'white',
-        background:'dodgerblue',
+        background: 'steelblue',
+        color:'white',
+        textTransform: 'none',
         '&:hover':{
             background:'royalblue'
         },
@@ -145,14 +147,6 @@ const InputStyles = {
     },
     disabledBtn:{
         backgroundColor:'grey'
-    },
-    btn:{
-        background: 'steelblue',
-        color:'white',
-        textTransform: 'none',
-        '&:hover': {
-            background: '#315a7d'
-        }
     },
 }
 
@@ -255,7 +249,10 @@ export const HookTheme = makeStyles((theme) => ({
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
         color: '#fff',
-      },
+    },
+    alignLeft:{
+        justifyContent: "flex-start",
+    }
 }));
 
 

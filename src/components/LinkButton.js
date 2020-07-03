@@ -8,7 +8,7 @@ const LinkButton = (props) => {
     const Theme = HookTheme();
 
     return (
-        <Link to={props.to} className="no-style white-text center"><Button className={`${Theme.btn}`}>{props.children}</Button></Link>
+        <Link to={props.to} className="no-style"><Button variant="contained" color="primary">{props.children}</Button></Link>
     );
 }
 

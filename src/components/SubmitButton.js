@@ -10,18 +10,17 @@ const SubmitButton = (props) => {
     return (
         <Box className={`${Theme.block}`}>
             <Button
+            variant="contained" 
+            color="primary"
             type="submit"
             disabled={props.disabled} 
-            className={`${windowSize.width > 768? Theme.loginButton : Theme.loginButton_M }`}
-            classes= { { disabled:Theme.disabledBtn } }
-            onClick={props.onClick}>{props.children}</Button>
+            classes= { { root: windowSize.width > 768? Theme.loginButton : Theme.loginButton_M , disabled:Theme.disabledBtn } }>{props.children}</Button>
         </Box>
     );
 }
 
 SubmitButton.propTypes = {
     disabled: PropTypes.bool,
-    onClick: PropTypes.func.isRequired
 }
 
 SubmitButton.defaultProps = {

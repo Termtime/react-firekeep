@@ -29,6 +29,10 @@ body{
   align-items: center;
   justify-content: center;
 }
+.self-center{
+  align-self: center;
+  justify-self: center;
+}
 .credits{
   display:flex;
   justify-content:center;
@@ -42,13 +46,17 @@ body{
   align-items: flex-end;
   justify-content: flex-end;
 }
-
+.self-end{
+  align-self:flex-end;
+  justify-self:flex-end;
+}
 .logo{
   width:40px;
 }
 
 .hideOverflow{
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .start{
@@ -96,3 +104,18 @@ body{
   user-select: none;
 }
 
+.drawer-container{
+  padding:5px;
+}
+
+.drawer-title{
+  align-self:center;
+}
+
+.drawer-item{
+  line-height: 30px;
+}
+
+.expand{
+  flex-grow: 1;
+}

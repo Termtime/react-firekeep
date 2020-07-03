@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { Paper, Fab, Menu, MenuItem, Backdrop } from '@material-ui/core';
-import { useWindowSize } from '../hooks/useWindowSize';
+import { Paper, Fab, Menu, MenuItem } from '@material-ui/core';
 import { HookTheme } from '../constants/theme';
-import { MoreVert, Save, Close, Delete } from '@material-ui/icons';
+import { MoreVert } from '@material-ui/icons';
 import { withFirebase } from '../provider/Firebase';
-import { NoteTitleTextfield } from './NoteTitleTextfield';
-import { NoteBodyTextfield } from './NoteBodyTextfield';
+import { NoteEditor } from './NoteEditor';
 
 const NoteContainerBase = (props) =>{
-    const windowSize = useWindowSize()
     const Theme = HookTheme();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -57,47 +54,34 @@ const NoteContainerBase = (props) =>{
         
     }
     return (
-        <div>
+        <div key={props.key}>
             <div>
-            <Backdrop open={isOpen} className={Theme.backdrop}>
-                <Paper className={`${Theme.flexContainer} ${Theme.notePaper} ${windowSize.width > 768? "note-editor": "note-editor-m"}`} elevation={3}>
-                    <Fab color="secondary" size="small" className="fab-right-top-corner" onClick={closeNote}><Close/></Fab>
-
-                    <Menu 
-                    open={Boolean(anchorEl)}
-                    anchorEl={anchorEl}
-                    keepMounted
-                    onClose={closeMenu}
-                    >
-                        <MenuItem onClick={() => deleteNote(props.note.id)}>Delete Note</MenuItem>
-                    </Menu>
-
-                    <NoteTitleTextfield value={noteTitle} setNoteTitle={setNoteTitle}/>
-                    <NoteBodyTextfield value={noteBody} setNoteBody={setNoteBody} setIsWriting={() => {}}/>
-                    <div className="row space-between">
-                        <div className="end column ">
-                            <Fab color="primary" size="small" className="note-fab-right-down-center" onClick={() => editNote()} ><Save/></Fab>
-                        </div>
-                        <div className="column end">
-                            <Fab color="secondary" size="small" className="fab-right-down-corner" onClick={() => deleteNote(props.note.id)} ><Delete/></Fab>
-                        </div>
-                    </div>
-                </Paper>
-            </Backdrop>
+                <NoteEditor
+                    isOpen={isOpen}
+                    anchorEl={anchorEl} 
+                    noteBody={noteBody} 
+                    noteTitle={noteTitle} 
+                    setNoteBody={setNoteBody} 
+                    setNoteTitle={setNoteTitle} 
+                    closeNote={closeNote} 
+                    editNote={editNote}
+                    deleteNote={deleteNote}
+                    noteId={props.note.id}/>
             </div>
-            <div className={`note  `} >
-                <Paper className={`${Theme.flexContainer} ${Theme.notePaper}  note`} elevation={3} onClick={openNote}>
-                    <Fab color="primary" size="small" className="note-fab-right-top-corner" onClick={openMenu}><MoreVert/></Fab>
+            <div className={`note`} >
+                <Paper className={`${Theme.flexContainer} ${Theme.notePaper} column  note`} elevation={3}>
+                    <Fab  color="primary" size="small" className="note-fab-right-top-corner" onClick={openMenu}><MoreVert/></Fab>
                     <Menu 
                     open={Boolean(anchorEl)}
                     anchorEl={anchorEl}
                     keepMounted
-                    onClose={closeMenu}
-                    >
+                    onClose={closeMenu}>
                         <MenuItem onClick={() => deleteNote(props.note.id)}>Delete Note</MenuItem>
                     </Menu>
-                    <h3 className="noteTitle hideOverflow">{props.note.title}</h3>
-                    <p className="noteBody">{props.note.body.length > 260? props.note.body.substring(0,260) + "..." : props.note.body}</p>
+                    <div onClick={openNote} className="note-info-container column">
+                        <h3 className="noteTitle hideOverflow">{props.note.title}</h3>
+                        <p className="noteBody hideOverflow"><span style={{whiteSpace:"pre-line"}}>{props.note.body.length > 260? props.note.body.substring(0,260) + "..." : props.note.body}</span></p>
+                    </div>
                 </Paper>
             </div>
         </div>

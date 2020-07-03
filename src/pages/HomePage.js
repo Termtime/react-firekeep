@@ -54,14 +54,13 @@ const HomePageBase = (props) =>
 
     const addNote = () =>
     {
+        if(noteBody === "") return;
         props.firebase.userNotes(props.firebase.auth.currentUser.uid)
         .add({title: noteTitle, body: noteBody}) //doc title gets randomly generated, add title and body of note
         .then(
             () => clearNote()
         )
     }
-
-    /* /user-notes/test@test.com/user-notes/OSaRYqKZvTenV1Kl5hKc  */
     return (
         <div>
             <div className={`flex-container center column`}>
@@ -104,7 +103,7 @@ const HomePageBase = (props) =>
             {
                 notes.map( (note, index) => {
                     return (
-                        <NoteContainer note={note}/>
+                        <NoteContainer key={note.id} note={note}/>
                     )
                 })
             }

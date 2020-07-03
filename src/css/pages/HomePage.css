@@ -27,6 +27,16 @@
     margin:0px;
     padding:0px;
     top: 30px;
+    /* left:20px; */
+}
+.note-fab-right-down-corner{
+    display:flex;
+    align-self:flex-end;
+    position:relative;
+    line-height:0px;
+    margin:0px;
+    padding:0px;
+    top: 30px;
     left:20px;
 }
 .note-fab-right-top-corner{
@@ -47,8 +57,7 @@
     line-height:0px;
     margin:0px;
     padding:0px;
-    top: 30px;
-    left:200px;
+    top: 70px;
 }
 
 .notes-container{
@@ -56,6 +65,10 @@
     color:white;
 }
 
+.note-info-container{
+    display: flex;
+    flex-grow: 1;
+}
 .note{
     text-align: start;
     flex-direction: column;

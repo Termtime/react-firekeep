@@ -9,7 +9,7 @@ import { LinkButton } from '../components/LinkButton';
     const Theme = HookTheme();
 
     return (
-        <div className={` ${Theme.flexContainer} center column `}>
+        <div className={` flex-container column center`}>
             <div className="row center max-width " style={{marginTop: '20px'}}>
                 <Paper className={`${Theme.flexContainer} ${Theme.titlePaper} title ` } elevation={3}>
                     <h1>Firekeep</h1>
@@ -17,14 +17,14 @@ import { LinkButton } from '../components/LinkButton';
                 </Paper>
             </div>
             <div className="row center">
-                <div className="column" style={{marginLeft:'20px'}}>
-                    <Paper className={`${Theme.subtitlePaper}`} elevation={3}>
+                <div className="column center" style={{marginLeft:'20px'}}>
+                    <Paper className={`${Theme.subtitlePaper} sub-paper column center`} elevation={3}>
                         <p>Quickly get started and Sign Up for our service</p>
                         <LinkButton to={ROUTES.SIGN_UP}>Get started</LinkButton>
                     </Paper>
                 </div>
-                <div className="column">
-                    <Paper className={`${Theme.subtitlePaper}`} elevation={3}>
+                <div className="column center">
+                    <Paper className={`${Theme.subtitlePaper} sub-paper column center`} elevation={3}>
                         <p>Already a member? </p>
                         <LinkButton to={ROUTES.SIGN_IN}>Log in</LinkButton>    
                     </Paper>
