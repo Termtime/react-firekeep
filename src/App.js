@@ -11,6 +11,7 @@ import { Credits } from './pages/CreditsPage';
 import { PassForgetPage } from './pages/PassForget';
 import {withAuthContextProvider } from './provider/Authentication';
 import { withFirebase } from './provider/Firebase';
+import { NotFoundPage } from './pages/NotFound';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path={ROUTES.HOME} component={HomePage}/>
           <Route path={ROUTES.PASSWORD_FORGET} component={PassForgetPage}/>
           <Route path={ROUTES.CREDITS} component={Credits}/>
+          <Route component={NotFoundPage}/>
         </Switch>
     </div>
     

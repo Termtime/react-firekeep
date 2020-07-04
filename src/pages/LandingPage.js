@@ -3,7 +3,7 @@ import { Paper} from '@material-ui/core';
 import { HookTheme } from '../constants/theme';
 import * as ROUTES from '../constants/routes';
 import { LinkButton } from '../components/LinkButton';
-
+import { withFirebase } from '../provider/Firebase';
  const LandingPageBase = (props) =>{
     
     const Theme = HookTheme();
@@ -25,8 +25,17 @@ import { LinkButton } from '../components/LinkButton';
                 </div>
                 <div className="column center">
                     <Paper className={`${Theme.subtitlePaper} sub-paper column center`} elevation={3}>
-                        <p>Already a member? </p>
-                        <LinkButton to={ROUTES.SIGN_IN}>Log in</LinkButton>    
+                        {props.firebase.auth.currentUser != null
+                            ?   <div className="column center">
+                                <p>You are already logged in!</p>
+                                <LinkButton to={ROUTES.HOME}>My notes</LinkButton>
+                                </div>
+                            :   <div className="row center">
+                                    <p>Already a member? </p>
+                                    <LinkButton to={ROUTES.SIGN_IN}>Log in</LinkButton>    
+                                </div>
+
+                        }
                     </Paper>
                 </div>
             </div>
@@ -34,5 +43,5 @@ import { LinkButton } from '../components/LinkButton';
     );
 }
 
-export const LandingPage = LandingPageBase;
+export const LandingPage = withFirebase(LandingPageBase);
 

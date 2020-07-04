@@ -36,7 +36,7 @@ const TopAppBarBase = (props) => {
                                 <div className="drawer-container column">
                                     <h1 className="drawer-title unselectable"> Firekeep </h1>
                                     <MenuList>
-                                        <MenuNavButton to={ROUTES.LANDING} onClick={handleClose} first><Home/> &nbsp;  <p className="drawer-item"> LANDING</p>  </MenuNavButton>
+                                        <MenuNavButton to={ROUTES.LANDING} onClick={handleClose} first><Home/> &nbsp;  <p className="drawer-item"> HOME</p>  </MenuNavButton>
                                         {props.firebase.auth.currentUser !== null
                                             ? <MenuNavButton to={ROUTES.HOME} onClick={handleClose}> <Notes/> &nbsp; <p className="drawer-item"> MY NOTES</p> </MenuNavButton> 
                                             : null

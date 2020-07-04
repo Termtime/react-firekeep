@@ -41,7 +41,6 @@ const HomePageBase = (props) =>
         if(props.firebase.auth.currentUser !== null)
         return props.firebase.userNotes(props.firebase.auth.currentUser.uid).onSnapshot( snapshot => {
             let allNotes = snapshot.docs.map( doc => ({id:doc.id, title: doc.data().title, body: doc.data().body}))
-            console.log(allNotes);
             setNotes(allNotes);
         })
     }

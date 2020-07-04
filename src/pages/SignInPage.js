@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as ROUTES from '../constants/routes';
 import { withRouter, Link } from 'react-router-dom';
 import { withFirebase } from '../provider/Firebase';
@@ -20,6 +20,19 @@ const SignInPageBase = (props) => {
     const [isInvalid, setIsInvalid] = useState(true);
     const [error, setError] = useState('');
 
+    useEffect(() => {
+        let isAuthReady = false
+        let unsubFirebaseListener;
+
+        props.firebase.auth.onAuthStateChanged((user) => {
+            if (!isAuthReady) {
+                isAuthReady = true
+                if(user !== null) props.history.push(ROUTES.HOME);
+            }
+        })
+        
+        return unsubFirebaseListener;
+    },[])
     const signIn = (evt) => {
         evt.preventDefault();
 
