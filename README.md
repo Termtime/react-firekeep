@@ -1,8 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-## You can find a working demo of the app here: http://termtime-react-firekeep.surge.sh/home
+### DEMO
+You can find a working demo of the app here: http://termtime-react-firekeep.surge.sh/home
 
 ### NOTE
-For the download app to run, you need to create your own /src/constants/config.js file that contains all the constants used for the /src/providers/Firebase/FirebaseConfig.js configuration.
+For the cloned version of the app to run, you need to create your own /src/constants/config.js file that contains all the constants used for the /src/providers/Firebase/FirebaseConfig.js configuration object.
 
 ## Available Scripts
 
