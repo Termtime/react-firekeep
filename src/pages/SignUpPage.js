@@ -39,7 +39,7 @@ const SignUpPageBase = (props) =>
                 .users()
                 .doc(authUser.user.uid) //document name
                 .set({email: email}); //document data
-            }).then(() => props.history.push(ROUTES.SIGN_IN)).catch(error =>
+            }).then(() => props.history.push(ROUTES.HOME)).catch(error =>
             {
                 if(error.code === 'auth/weak-password')
                 {

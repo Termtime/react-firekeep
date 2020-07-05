@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, IconButton, Drawer, MenuList, MenuItem, Typography, Avatar, Tooltip} from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, Drawer, MenuList, Typography, Avatar, Tooltip} from "@material-ui/core";
 import * as ROUTES from '../constants/routes';
 import { HookTheme } from '../constants/theme';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { MenuOutlined, Home, Notes, HowToReg, MeetingRoom, LibraryBooks } from '@material-ui/icons';
 import { MenuNavButton } from './MenuNavButton';
 import { withFirebase } from '../provider/Firebase';
