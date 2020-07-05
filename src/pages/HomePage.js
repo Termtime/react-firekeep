@@ -1,6 +1,6 @@
 import React, { useState, useEffect,} from 'react';
 import { protectedWithAuth } from '../provider/Authentication';
-import { Paper, Fab, CircularProgress} from '@material-ui/core';
+import { Paper, Fab} from '@material-ui/core';
 import { Close, Save} from '@material-ui/icons';
 import { HookTheme } from '../constants/theme';
 import { NoteContainer } from '../components/NoteContainer';
@@ -8,6 +8,7 @@ import { NoteTitleTextfield } from '../components/NoteTitleTextfield';
 import { NoteBodyTextfield } from '../components/NoteBodyTextfield';
 import { useWindowSize } from '../hooks/useWindowSize';
 import Masonry from 'react-responsive-masonry';
+import { LoadingBackdrop } from '../components/LoadingBackdrop';
 
 const HomePageBase = (props) =>
 {
@@ -21,7 +22,6 @@ const HomePageBase = (props) =>
     const Theme = HookTheme();
     const windowSize = useWindowSize();
 
-    //componentDidMount
     useEffect( () => {
         let isAuthReady = false
         let unsubFirebaseListener;
@@ -65,13 +65,12 @@ const HomePageBase = (props) =>
             <div className={`flex-container center column`}>
                 <Paper className={`${Theme.flexContainer} ${Theme.notePaper} title `} onFocus={()=>setIsWriting(true)}>
                         { isWriting ?
-                                <Fab color="secondary" size="small" className="fab-right-top-corner" onClick={() => clearNote()} ><Close /></Fab>
+                                <React.Fragment>
+                                    <Fab color="secondary" size="small" className="fab-right-top-corner" onClick={() => clearNote()} ><Close /></Fab>
+                                    <NoteTitleTextfield value={noteTitle} setNoteTitle={setNoteTitle}/>
+                                </React.Fragment>
                             :
                             null
-                        }
-                        { isWriting 
-                            ?   <NoteTitleTextfield value={noteTitle} setNoteTitle={setNoteTitle}/>
-                            :   null
                         }
                         
                         <div className="row center">
@@ -91,11 +90,7 @@ const HomePageBase = (props) =>
             </div>
             {
                 isLoading
-                ?   <div className="flex-container row center"> 
-                        <div className="flex-container column center">
-                            <CircularProgress color="secondary" />
-                        </div> 
-                    </div> 
+                ?   <LoadingBackdrop/> 
                 :   null
             }
             <Masonry className={`notes-container ${windowSize.width > 768? "start" : "space-between"}`} columnsCount={windowSize.width > 768? 7 : 2}>
@@ -110,7 +105,6 @@ const HomePageBase = (props) =>
         </div>
     );
 }
-//max-width
 const loginCondition = authUser => authUser !== null;
 
 export const HomePage = protectedWithAuth(loginCondition)(HomePageBase);

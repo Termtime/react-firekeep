@@ -91,4 +91,4 @@ const SignInPageBase = (props) => {
     );
 }
 
-export const SignInPage = withRouter(withFirebase(withAuthContext(SignInPageBase)));
+export const SignInPage = withRouter(withFirebase(SignInPageBase));

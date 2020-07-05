@@ -109,11 +109,6 @@ const SignUpPageBase = (props) =>
                 </div>
             </form>
             
-            {/* <div className="row center">
-                <Button>
-                    <Link className="no-style white-text" to={ROUTES.PASSWORD_FORGET}>Forgot your password?</Link>
-                </Button>
-            </div> */}
             <div className="row center">
                 <small>Have an account?</small>
                 <Button>
