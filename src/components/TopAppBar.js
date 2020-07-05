@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { MenuOutlined, Home, Notes, HowToReg, MeetingRoom, LibraryBooks } from '@material-ui/icons';
 import { MenuNavButton } from './MenuNavButton';
 import { withFirebase } from '../provider/Firebase';
+import { withAuthContext } from '../provider/Authentication';
 
 const TopAppBarBase = (props) => {
     const Theme = HookTheme();
@@ -53,7 +54,7 @@ const TopAppBarBase = (props) => {
                     <img className="logo" alt="firebase-logo" src={process.env.PUBLIC_URL + "/firebase.png"}></img>
                     <Typography variant="h6" className="unselectable">FireKeep</Typography>
                 </Toolbar>
-                {props.firebase.auth.currentUser != null
+                {props.authUser != null && props.firebase.auth.currentUser != null
                     ?   <div className="column bfc avatar-container">
                             <div className=" row flex-container end">
                                 <Tooltip title="Logout">
@@ -69,4 +70,4 @@ const TopAppBarBase = (props) => {
     );
 }
 
-export const TopAppBar = withRouter(withFirebase(TopAppBarBase));
+export const TopAppBar = withRouter(withFirebase(withAuthContext(TopAppBarBase)));

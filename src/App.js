@@ -10,6 +10,7 @@ import { HomePage } from './pages/HomePage';
 import { Credits } from './pages/CreditsPage';
 import { PassForgetPage } from './pages/PassForget';
 import { withFirebase } from './provider/Firebase';
+import { withAuthContextProvider } from './provider/Authentication';
 import { NotFoundPage } from './pages/NotFound';
 
 
@@ -32,4 +33,4 @@ function App() {
   );
 }
 
-export default withFirebase(App);
+export default withFirebase(withAuthContextProvider(App));

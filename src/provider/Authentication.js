@@ -3,7 +3,23 @@ import { withRouter } from 'react-router';
 import { withFirebase } from './Firebase/context';
 import * as ROUTES from '../constants/routes';
 import { compose } from 'recompose';
+export const INITIAL_CONTEXT_STATE = {
+  isUserLoggedIn: false,
+  user: '',
+  token: '',
+  login: async () =>
+  {
+    // alert('login')
+    INITIAL_CONTEXT_STATE.isUserLoggedIn = true;
+  },
+  logout: async () =>
+  {
+    // alert('loggedoff')
+    INITIAL_CONTEXT_STATE.isUserLoggedIn = true;
+  }
+}
 
+export const AuthContext = React.createContext(INITIAL_CONTEXT_STATE);
 export const protectedWithAuth = condition => Component => {
 
   class WithAuthorization extends React.Component {
@@ -35,4 +51,38 @@ export const protectedWithAuth = condition => Component => {
   )(WithAuthorization);
 };
 
+export const withAuthContextProvider = Component => props => 
+{
+  const [authUser, setAuthUser] = useState(null);
+
+  useEffect( () => 
+    {
+      const unsubscribeListener = props.firebase.auth.onAuthStateChanged( user => {
+        if (user) {
+            setAuthUser(user);
+        } else {
+            // removes user on logout
+            setAuthUser(null);
+        }
+      });
+
+      return unsubscribeListener;
+    }
+    ,[]);
+
+    return (
+      <AuthContext.Provider value={authUser}>
+        <Component {...props} />
+      </AuthContext.Provider>
+    );
+}
+
+export const withAuthContext = Component => props =>
+{
+  return (
+    <AuthContext.Consumer>
+      {authUser => <Component {...props} authUser={authUser}/>}
+    </AuthContext.Consumer>
+  )
+}
 
