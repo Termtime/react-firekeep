@@ -53,7 +53,7 @@ const TopAppBarBase = (props) => {
                     <img className="logo" alt="firebase-logo" src={process.env.PUBLIC_URL + "/firebase.png"}></img>
                     <Typography variant="h6" className="unselectable">FireKeep</Typography>
                 </Toolbar>
-                {props.authUser != null && props.firebase.auth.currentUser != null
+                {props.firebase.auth.currentUser != null
                     ?   <div className="column bfc avatar-container">
                             <div className=" row flex-container end">
                                 <Tooltip title="Logout">
