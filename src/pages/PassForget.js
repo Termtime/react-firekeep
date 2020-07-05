@@ -20,7 +20,6 @@ const PassForgetBase = (props) =>
     const sendEmail = (event) => 
     {
         event.preventDefault();
-        
         props.firebase.passwordReset(email);
         setTimeout(setEmailSent(true),500);
     }
@@ -40,10 +39,10 @@ const PassForgetBase = (props) =>
                         }
                         {emailSent
                             ?   null
-                            :   <Fragment>
+                            :   <React.Fragment>
                                     <EmailTextField email={email} setEmail={setEmail} error={error} setError={setError} setIsInvalid={setIsInvalid}/>
                                     <SubmitButton disabled={isInvalid} onClick={sendEmail}>Send email</SubmitButton>
-                                </Fragment>
+                                </React.Fragment>
                         }
                         
                     </Card>

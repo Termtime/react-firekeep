@@ -30,11 +30,10 @@ import { withFirebase } from '../provider/Firebase';
                                 <p>You are already logged in!</p>
                                 <LinkButton to={ROUTES.HOME}>My notes</LinkButton>
                                 </div>
-                            :   <div className="row center">
+                            :   <div className="column center">
                                     <p>Already a member? </p>
                                     <LinkButton to={ROUTES.SIGN_IN}>Log in</LinkButton>    
                                 </div>
-
                         }
                     </Paper>
                 </div>
