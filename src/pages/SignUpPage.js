@@ -14,82 +14,59 @@ const SignUpPageBase = (props) =>
     const Theme = HookTheme();
     let windowSize = useWindowSize();
 
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
-    const [pass2, setPass2] = useState('');
-    const [isEmailInvalid, setIsEmailInvalid] = useState(true);
-    const [isPassInvalid, setIsPassInvalid] = useState(true);
-    const [isInvalid, setIsInvalid] = useState(true);
-    const [error, setError] = useState('');
-    const [passError, setPassError] = useState('');
+    const [emailState, setEmailState] = useState({email: '', error: null});
+    const [passState, setPassState] = useState({pass: '', error: null});
+    const [passState2, setPassState2] = useState({pass: '', error: null});
 
     const signUp = evt =>
     {
         evt.preventDefault();
-        if(pass !== pass2)
-        {
-            setPassError('Both passwords must match');
-        }
-
-        props.firebase.createUserWithEmailPassword(email, pass).then(
+        props.firebase.createUserWithEmailPassword(emailState.email, passState.pass).then(
             authUser => {
                 //create user in firebase storage
-                console.log(authUser);
                 return props.firebase
                 .users()
-                .doc(authUser.user.uid) //document name
-                .set({email: email}); //document data
+                .doc(authUser.user.uid) //document name or ID
+                .set({email: emailState.email}); //document data
             }).then(() => props.history.push(ROUTES.HOME)).catch(error =>
             {
                 if(error.code === 'auth/weak-password')
                 {
-                    setPassError('Password is too weak');
+                    setPassState({...passState, error: 'Password is too weak'});
                 }
                 else if(error.code === 'auth/email-already-in-use')
                 {
-                    setError('User already exists')
+                    setEmailState({...emailState, error: 'User already exists'})
                 }
                 else
                 {
-                    console.log(error);
-                    setError(error.code);
+                    setEmailState({...emailState, error: error.code})
                 }
             }
         );
     }
 
-    const checkIfInvalid = (email, isInvalid = true) =>
-    {
-        setEmail(email);
-        
-        if(!isInvalid && !isPassInvalid) setIsInvalid(false);
-        else setIsInvalid(true);
-    }
-    const checkIsPassInValid = ( {p1=pass, p2 = pass2} ) => 
+    const checkIsPassInValid = ( {p1=passState.pass, p2 = passState2.pass} ) => 
     {
         if(p1 !== '' && p2 !== '' && p1 === p2)
         {
-            setIsPassInvalid(false);
-            setPassError('');
-            if(!isEmailInvalid) setIsInvalid(false);
+            setPassState({pass:p1, error: null});
+            setPassState2({pass:p2, error: null});
         }
         else{
-            setIsPassInvalid(true);
-            setIsInvalid(true);
-            setPassError('Password must not be empty and both fields must match');
+            setPassState({pass:p1, error: 'Password must not be empty and both fields must match'});
+            setPassState2({pass:p2, error: 'Password must not be empty and both fields must match'});
         }
     }
 
-    const handlePassInput1 = value =>
+    const handlePassInput1 = pass =>
     {
-        setPass(value);
-        checkIsPassInValid( { p1 : value });
+        checkIsPassInValid( { p1 : pass });
     }
 
-    const handlePassInput2 = value =>
+    const handlePassInput2 = pass =>
     {
-        setPass2(value);
-        checkIsPassInValid( { p2 : value });
+        checkIsPassInValid( { p2 : pass });
     }
     return(
         <div className={`flex-container column max-width`}>
@@ -98,13 +75,13 @@ const SignUpPageBase = (props) =>
                     <Card className={`${windowSize.width > 768? Theme.loginCard : Theme.loginCard_M} flex-container column`}>
                             <h1>Sign up now</h1>
                             <small className="login-subtitle">Create an account to continue</small>
-                            <EmailTextField email={email} setEmail={checkIfInvalid} error={error} setError={setError} setIsInvalid={setIsEmailInvalid}/>
+                            <EmailTextField emailState={emailState} setEmailState={(email, error) => setEmailState({email, error})}/>
                             <br/>
-                            <PasswordTextField pass={pass} setPass={handlePassInput1} label="Password" error={passError}/>
+                            <PasswordTextField passState={passState} setPassState={(pass) => handlePassInput1(pass)} label="Password" error={passState.error}/>
                             <br/>
-                            <PasswordTextField pass={pass2} setPass={handlePassInput2} label="Confirm Password" error={passError}/>
+                            <PasswordTextField passState={passState2} setPassState={(pass) => handlePassInput2(pass)} label="Confirm Password" error={passState.error}/>
                             <br/>
-                            <SubmitButton disabled={isInvalid} >Sign Up</SubmitButton>
+                            <SubmitButton disabled={ (Boolean(passState.error) || Boolean(emailState.error)) ||  (passState.pass === '' && passState2.pass === '')}>Sign Up</SubmitButton>
                     </Card>    
                 </div>
             </form>

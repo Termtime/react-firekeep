@@ -19,11 +19,11 @@ const TopAppBarBase = (props) => {
         props.history.push(ROUTES.PROFILE);
     }
 
-    // const logout = () => {
-    //     props.firebase.signOut().then(
-    //         () => props.history.push(ROUTES.SIGN_IN)
-    //     )
-    // }
+    const logout = () => {
+        props.firebase.signOut().then(
+            () => props.history.push(ROUTES.SIGN_IN)
+        )
+    }
 
     const handleClose = () => {
         setDrawerIsOpen(false);
@@ -63,7 +63,7 @@ const TopAppBarBase = (props) => {
                                     <Avatar 
                                     className="avatar" 
                                     alt={props.firebase.auth.currentUser.displayName}
-                                    onClick={avatarClickHandler}>
+                                    onClick={logout}>
                                         {props.firebase.auth.currentUser.displayName !== "" && props.firebase.auth.currentUser.displayName !== null
                                             ? props.firebase.auth.currentUser.displayName.match(/\b[a-zA-Z]/gm).map(letter => letter)
                                             : "E"

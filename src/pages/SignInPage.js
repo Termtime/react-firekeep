@@ -16,11 +16,8 @@ const SignInPageBase = (props) => {
     const Theme = HookTheme();
     let windowSize = useWindowSize();
     //state
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
-    const [isInvalid, setIsInvalid] = useState(true);
-    const [error, setError] = useState('');
-
+    const [emailState, setEmailState] = useState({email: '', error: null});
+    const [passState, setPassState] = useState({pass: '', error: null});
     useEffect(() => {
         let isAuthReady = false
         let unsubFirebaseListener;
@@ -37,7 +34,7 @@ const SignInPageBase = (props) => {
     const signIn = (evt) => {
         evt.preventDefault();
 
-        props.firebase.loginWithEmailPassword(email,pass).then(
+        props.firebase.loginWithEmailPassword(emailState.email,passState.pass).then(
             async authUser => {
                 props.history.push(ROUTES.HOME);
                 
@@ -45,15 +42,15 @@ const SignInPageBase = (props) => {
                 {
                     if(error.code === 'auth/wrong-password')
                     {
-                        setError('Invalid credentials');
+                        setPassState({...passState, error: 'Invalid credentials'});
                     }
                     else if(error.code === 'auth/user-not-found')
                     {
-                        setError('User not found')
+                        setEmailState({...emailState, error: 'User not found'});
                     }
                     else
                     {
-                        setError(error.code);
+                        setEmailState({...emailState, error: error.code});
                     }
                 }
             );
@@ -72,17 +69,18 @@ const SignInPageBase = (props) => {
                     <Card className={`${windowSize.width > 768? Theme.loginCard : Theme.loginCard_M} flex-container column`}>
                             <h1>Welcome Back!</h1>
                             <small className="login-subtitle">Log in to continue</small>
-                            <EmailTextField email={email} setEmail={setEmail} error={error} setError={setError} setIsInvalid={setIsInvalid}/>
+                            <EmailTextField emailState = {emailState} setEmailState={(email, error) => setEmailState({email, error})}/>
                             <br/>
-                            <PasswordTextField pass={pass} setPass={setPass} label="Password"/>
+                            <PasswordTextField passState={passState} setPassState={(pass, error) => setPassState({pass, error})} label="Password"/>
                             <br/>
-                            <SubmitButton disabled={isInvalid}>Log in</SubmitButton>
+                            <SubmitButton disabled={Boolean(emailState.error) || emailState.email === ''}>Log in</SubmitButton>
                             <div className="row">
                                 <hr className="middle-text-divider" color="white"/>
                                 <p>OR</p>
                                 <hr className="middle-text-divider" color="white"/>
                             </div>
                             <ContainerButton onClick={loginGoogle}><p>Log in with Google</p></ContainerButton>
+                            <br/>
                     </Card>
                 
                 </div>
