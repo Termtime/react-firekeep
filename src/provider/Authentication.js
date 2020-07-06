@@ -3,23 +3,8 @@ import { withRouter } from 'react-router';
 import { withFirebase } from './Firebase/context';
 import * as ROUTES from '../constants/routes';
 import { compose } from 'recompose';
-export const INITIAL_CONTEXT_STATE = {
-  isUserLoggedIn: false,
-  user: '',
-  token: '',
-  login: async () =>
-  {
-    // alert('login')
-    INITIAL_CONTEXT_STATE.isUserLoggedIn = true;
-  },
-  logout: async () =>
-  {
-    // alert('loggedoff')
-    INITIAL_CONTEXT_STATE.isUserLoggedIn = true;
-  }
-}
 
-export const AuthContext = React.createContext(INITIAL_CONTEXT_STATE);
+export const AuthContext = React.createContext();
 export const protectedWithAuth = condition => Component => {
 
   class WithAuthorization extends React.Component {

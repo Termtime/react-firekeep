@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import * as ROUTES from '../constants/routes';
 import { withRouter, Link } from 'react-router-dom';
 import { withFirebase } from '../provider/Firebase';
-import { Card, Button,} from '@material-ui/core';
+import { Card, Button, Divider,} from '@material-ui/core';
 import { HookTheme } from '../constants/theme';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { EmailTextField } from '../components/EmailTextField';
 import { PasswordTextField } from '../components/PasswordTextField';
 import { SubmitButton } from '../components/SubmitButton';
 import { withAuthContext } from '../provider/Authentication';
+import { ContainerButton } from '../components/ContainerButton';
 
 const SignInPageBase = (props) => {
     //hooks
@@ -57,6 +58,11 @@ const SignInPageBase = (props) => {
                 }
             );
     }
+    const loginGoogle = async () => {
+        const result = await props.firebase.loginWithGoogle();
+        console.log(result);
+        props.history.push(ROUTES.HOME);
+    }
     
     return (
         <div className={`flex-container column max-width`}>
@@ -71,6 +77,12 @@ const SignInPageBase = (props) => {
                             <PasswordTextField pass={pass} setPass={setPass} label="Password"/>
                             <br/>
                             <SubmitButton disabled={isInvalid}>Log in</SubmitButton>
+                            <div className="row">
+                                <hr className="middle-text-divider" color="white"/>
+                                <p>OR</p>
+                                <hr className="middle-text-divider" color="white"/>
+                            </div>
+                            <ContainerButton onClick={loginGoogle}><p>Log in with Google</p></ContainerButton>
                     </Card>
                 
                 </div>

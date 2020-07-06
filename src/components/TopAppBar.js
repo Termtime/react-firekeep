@@ -12,7 +12,6 @@ const TopAppBarBase = (props) => {
     const Theme = HookTheme();
 
     const [drawerIsOpen, setDrawerIsOpen] = useState(false);
-
     const toggleDrawer = () => {
       setDrawerIsOpen(!drawerIsOpen);
     }
@@ -58,7 +57,15 @@ const TopAppBarBase = (props) => {
                     ?   <div className="column bfc avatar-container">
                             <div className=" row flex-container end">
                                 <Tooltip title="Logout">
-                                    <Avatar className="avatar" tooltip alt ={props.firebase.auth.displayName} onClick={() => logout()}>E</Avatar>
+                                    <Avatar 
+                                    className="avatar" 
+                                    alt={props.firebase.auth.currentUser.displayName}
+                                    onClick={() => logout()}>
+                                        {props.firebase.auth.currentUser.displayName !== "" && props.firebase.auth.currentUser.displayName !== null
+                                            ? props.firebase.auth.currentUser.displayName.match(/\b[a-zA-Z]/gm).map(letter => letter)
+                                            : "E"
+                                        }
+                                    </Avatar>
                                 </Tooltip>
                             </div>
                         </div>
