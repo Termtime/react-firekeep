@@ -1,3 +1,9 @@
 .login-subtitle{
     margin-bottom:20px;
 }
+
+.middle-text-divider{
+    display:flex;
+    align-self: center;
+    width:150px;
+}
