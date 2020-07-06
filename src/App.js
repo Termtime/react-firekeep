@@ -12,6 +12,7 @@ import { PassForgetPage } from './pages/PassForget';
 import { withFirebase } from './provider/Firebase';
 import { withAuthContextProvider } from './provider/Authentication';
 import { NotFoundPage } from './pages/NotFound';
+import { ProfilePage } from './pages/ProfilePage';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path={ROUTES.SIGN_UP} component={SignUpPage}/>
           <Route path={ROUTES.HOME} component={HomePage}/>
           <Route path={ROUTES.PASSWORD_FORGET} component={PassForgetPage}/>
+          <Route path={ROUTES.PROFILE} component={ProfilePage}/>
           <Route path={ROUTES.CREDITS} component={Credits}/>
           <Route component={NotFoundPage}/>
         </Switch>

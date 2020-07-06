@@ -11,20 +11,31 @@ const EmailTextField = (props) => {
 
     const handleEmailInput = event =>
     {
-        
         //reset error on text input
-        props.setError('');
+        
+        props.setError(null);
         //email regex
         const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(regex.test(event.target.value) && event.target.value.toString() !== '')
         {
-            props.setIsInvalid(false);
+            console.log("regex pass", event.target.value);
             props.setEmail(event.target.value, false);
+            
+            try{
+                props.setIsInvalid(false);
+            } catch{
+                
+            }
+            
         }
         else{
-            props.setIsInvalid(true);
+            console.log("regex fail",event.target.value);
             props.setEmail(event.target.value, true);
             props.setError('Enter valid email');
+            try{
+                props.setIsInvalid(true);
+            } catch{}
+            
         }
     }
 
@@ -36,7 +47,7 @@ const EmailTextField = (props) => {
             type="text"
             label="Email"
             placeholder="test@test.com"
-            error={props.error !== ''? true : false}
+            error={Boolean(props.error)}
             helperText={props.error !== ''? props.error : null}
         />
     );
@@ -47,7 +58,7 @@ EmailTextField.propTypes = {
     email: PropTypes.string.isRequired,
     setError: PropTypes.func.isRequired,
     setEmail: PropTypes.func.isRequired,
-    setIsInvalid: PropTypes.func.isRequired,
+    setIsInvalid: PropTypes.func,
 }
 
 export { EmailTextField };

@@ -252,6 +252,10 @@ export const HookTheme = makeStyles((theme) => ({
     },
     alignLeft:{
         justifyContent: "flex-start",
+    },
+    bigAvatar: {
+        width: theme.spacing(10),
+        height: theme.spacing(10),
     }
 }));
 
