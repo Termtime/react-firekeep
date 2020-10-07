@@ -3,7 +3,7 @@ import { AppBar, Toolbar, IconButton, Drawer, MenuList, Typography, Avatar, Tool
 import * as ROUTES from '../constants/routes';
 import { HookTheme } from '../constants/theme';
 import { withRouter } from 'react-router-dom';
-import { MenuOutlined, Home, Notes, HowToReg, MeetingRoom, LibraryBooks } from '@material-ui/icons';
+import { MenuOutlined, Home, Notes, HowToReg, MeetingRoom, LibraryBooks, ExitToApp } from '@material-ui/icons';
 import { MenuNavButton } from './MenuNavButton';
 import { withFirebase } from '../provider/Firebase';
 import { withAuthContext } from '../provider/Authentication';
@@ -22,7 +22,9 @@ const TopAppBarBase = (props) => {
     const logout = () => {
         props.firebase.signOut().then(
             () => props.history.push(ROUTES.SIGN_IN)
+            
         )
+        setDrawerIsOpen(false);
     }
 
     const handleClose = () => {
@@ -40,7 +42,10 @@ const TopAppBarBase = (props) => {
                                     <MenuList>
                                         <MenuNavButton to={ROUTES.LANDING} onClick={handleClose} first><Home/> &nbsp;  <p className="drawer-item"> HOME</p>  </MenuNavButton>
                                         {props.firebase.auth.currentUser !== null
-                                            ? <MenuNavButton to={ROUTES.HOME} onClick={handleClose}> <Notes/> &nbsp; <p className="drawer-item"> MY NOTES</p> </MenuNavButton> 
+                                            ?   <div>
+                                                    <MenuNavButton to={ROUTES.HOME} onClick={handleClose}> <Notes/> &nbsp; <p className="drawer-item"> MY NOTES</p> </MenuNavButton> 
+                                                    <MenuNavButton to={ROUTES.SIGN_IN} onClick={logout}> <ExitToApp/> &nbsp; <p className="drawer-item">LOG OUT</p> </MenuNavButton>
+                                                </div>
                                             : null
                                         }
                                         {props.firebase.auth.currentUser === null
@@ -59,11 +64,11 @@ const TopAppBarBase = (props) => {
                 {props.authUser != null && props.firebase.auth.currentUser != null
                     ?   <div className="column bfc avatar-container">
                             <div className=" row flex-container end">
-                                <Tooltip title="Logout">
+                                <Tooltip title="Profile">
                                     <Avatar 
                                     className="avatar" 
                                     alt={props.firebase.auth.currentUser.displayName}
-                                    onClick={logout}>
+                                    onClick={avatarClickHandler}>
                                         {props.firebase.auth.currentUser.displayName !== "" && props.firebase.auth.currentUser.displayName !== null
                                             ? props.firebase.auth.currentUser.displayName.match(/\b[a-zA-Z]/gm).map(letter => letter)
                                             : "E"

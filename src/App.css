@@ -20,6 +20,10 @@
   flex-grow:100;
 }
 
+.big-image{
+  width:70%;
+}
+
 body{
   background-color: #131414;
   color:white;

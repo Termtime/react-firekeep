@@ -1,6 +1,6 @@
 import React, { useState, useEffect,} from 'react';
 import { protectedWithAuth } from '../provider/Authentication';
-import { Paper, Fab} from '@material-ui/core';
+import { Paper, Fab, CircularProgress} from '@material-ui/core';
 import { Close, Save} from '@material-ui/icons';
 import { HookTheme } from '../constants/theme';
 import { NoteContainer } from '../components/NoteContainer';
@@ -90,7 +90,7 @@ const HomePageBase = (props) =>
             </div>
             {
                 isLoading
-                ?   <LoadingBackdrop/> 
+                ?   <CircularProgress color="secondary" />
                 :   null
             }
             <Masonry className={`notes-container ${windowSize.width > 768? "start" : "space-between"}`} columnsCount={windowSize.width > 768? 7 : 2}>

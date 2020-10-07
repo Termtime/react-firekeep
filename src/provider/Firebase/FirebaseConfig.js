@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/storage';
 import * as CONFIG from '../../constants/config';
 
 const config = {
@@ -21,6 +22,7 @@ const config = {
           this.auth.useDeviceLanguage();
           this.googleProvider = new firebase.auth.GoogleAuthProvider();
           this.db = firebase.firestore();
+          this.storage = firebase.storage();
       }
 
       //AUTH functions
@@ -76,10 +78,13 @@ const config = {
         return this.auth.currentUser.updatePassword(newPassword);
       }
       
-      //Database Functions
+      updateProfileInfo = (info) => this.auth.currentUser.updateProfile(info);
+      //Database and storage Functions
 
-      users = uid => this.db.collection(`users`)
-      userNotes = uid => this.db.collection('user-notes').doc(uid).collection('notes')
+      users = uid => this.db.collection(`users`);
+      currentUserProfile = () => this.db.collection(`users`).doc(this.auth.currentUser.uid);
+      currentUserStorage = () => this.storage.ref(`/users/${this.auth.currentUser.uid}`);
+      userNotes = uid => this.db.collection('user-notes').doc(uid).collection('notes');
 
       getCurrentUser = () => this.auth.currentUser.uid;
   }

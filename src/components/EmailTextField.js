@@ -39,11 +39,8 @@ const EmailTextField = (props) => {
 }
 
 EmailTextField.propTypes = {
-    error: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    setError: PropTypes.func.isRequired,
-    setEmail: PropTypes.func.isRequired,
-    setIsInvalid: PropTypes.func,
+    emailState: PropTypes.object.isRequired,
+    setEmailState: PropTypes.func.isRequired,
 }
 
 export { EmailTextField };
