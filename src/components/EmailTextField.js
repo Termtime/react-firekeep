@@ -11,43 +11,36 @@ const EmailTextField = (props) => {
 
     const handleEmailInput = event =>
     {
-        
-        //reset error on text input
-        props.setError('');
         //email regex
         const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(regex.test(event.target.value) && event.target.value.toString() !== '')
         {
-            props.setIsInvalid(false);
-            props.setEmail(event.target.value, false);
+            props.setEmailState(event.target.value, null);
+            
         }
         else{
-            props.setIsInvalid(true);
-            props.setEmail(event.target.value, true);
-            props.setError('Enter valid email');
+            props.setEmailState(event.target.value,'Enter a valid email');
         }
+            
     }
 
     return (
         <TextField 
             className={`${windowSize.width > 768? Theme.darkInput : Theme.darkInput_M } `}
             onChange={handleEmailInput}
-            value={props.email}
+            value={props.emailState.email}
             type="text"
             label="Email"
             placeholder="test@test.com"
-            error={props.error !== ''? true : false}
-            helperText={props.error !== ''? props.error : null}
+            error={Boolean(props.emailState.error)}
+            helperText={Boolean(props.emailState.error)? props.emailState.error : null}
         />
     );
 }
 
 EmailTextField.propTypes = {
-    error: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    setError: PropTypes.func.isRequired,
-    setEmail: PropTypes.func.isRequired,
-    setIsInvalid: PropTypes.func.isRequired,
+    emailState: PropTypes.object.isRequired,
+    setEmailState: PropTypes.func.isRequired,
 }
 
 export { EmailTextField };

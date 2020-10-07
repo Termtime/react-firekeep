@@ -45,6 +45,7 @@ export const withAuthContextProvider = Component => props =>
       const unsubscribeListener = props.firebase.auth.onAuthStateChanged( user => {
         if (user) {
             setAuthUser(user);
+            console.log(user);
         } else {
             // removes user on logout
             setAuthUser(null);

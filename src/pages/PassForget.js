@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { HookTheme } from '../constants/theme';
 import { Card } from '@material-ui/core';
@@ -12,15 +12,13 @@ const PassForgetBase = (props) =>
     const windowSize = useWindowSize();
 
     //state
-    const [email, setEmail] = useState('');
-    const [isInvalid, setIsInvalid] = useState(true);
-    const [error, setError] = useState('');
+    const [emailState, setEmailState] = useState({email: '', error: null});
     const [emailSent, setEmailSent] = useState(false);
 
     const sendEmail = (event) => 
     {
         event.preventDefault();
-        props.firebase.passwordReset(email);
+        props.firebase.passwordReset(emailState.email);
         setTimeout(setEmailSent(true),500);
     }
     
@@ -40,8 +38,8 @@ const PassForgetBase = (props) =>
                         {emailSent
                             ?   null
                             :   <React.Fragment>
-                                    <EmailTextField email={email} setEmail={setEmail} error={error} setError={setError} setIsInvalid={setIsInvalid}/>
-                                    <SubmitButton disabled={isInvalid} onClick={sendEmail}>Send email</SubmitButton>
+                                    <EmailTextField emailState={emailState} setEmailState={(email, error) => setEmailState({email, error})} />
+                                    <SubmitButton disabled={Boolean(emailState.error) || emailState.email === ''} onClick={sendEmail}>Send email</SubmitButton>
                                 </React.Fragment>
                         }
                         

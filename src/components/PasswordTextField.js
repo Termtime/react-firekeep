@@ -11,23 +11,21 @@ const PasswordTextField = (props) => {
     return (
         <TextField
         className={`${windowSize.width > 768?  Theme.darkInput : Theme.darkInput_M }`}
-        error={props.error !== ''? true : false}
-        helperText={props.error}
+        error={Boolean(props.passState.error)}
+        helperText={props.passState.error}
         type="password"
         label={props.label}
-        value={props.pass}
-        onChange={(e) => props.setPass(e.target.value)}
+        value={props.passState.pass}
+        onChange={(event) => props.setPassState(event.target.value)}
         placeholder="password"/>
     );
 }
 
 PasswordTextField.propTypes = {
-    pass: PropTypes.string.isRequired,
-    setPass: PropTypes.func.isRequired,
-    error: PropTypes.string
+    passState: PropTypes.object.isRequired,
+    setPassState: PropTypes.func.isRequired,
 }
 PasswordTextField.defaultProps = {
     label: '',
-    error: ''
 }
 export { PasswordTextField };
