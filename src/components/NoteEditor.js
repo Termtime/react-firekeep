@@ -1,5 +1,5 @@
 import React from 'react';
-import { Backdrop, Paper, Fab, Menu, MenuItem } from '@material-ui/core';
+import { Backdrop, Paper, Fab, Menu, MenuItem, Tooltip } from '@material-ui/core';
 import { HookTheme } from '../constants/theme';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { NoteTitleTextfield } from './NoteTitleTextfield';
@@ -14,7 +14,9 @@ export const NoteEditor = (props) => {
     return (
         <Backdrop open={props.isOpen} className={Theme.backdrop}>
                 <Paper className={`${Theme.flexContainer} ${Theme.notePaper} ${windowSize.width > 768? "note-editor": "note-editor-m"}`} elevation={3}>
-                    <Fab color="secondary" size="small" className="fab-right-top-corner" onClick={props.closeNote}><Close/></Fab>
+                    <Tooltip title="Close">
+                        <Fab color="secondary" size="small" className="fab-right-top-corner" onClick={props.closeNote}><Close/></Fab>
+                    </Tooltip>
 
                     <Menu 
                     open={Boolean(props.anchorEl)}
@@ -29,10 +31,14 @@ export const NoteEditor = (props) => {
                     <NoteBodyTextfield value={props.noteBody} setNoteBody={props.setNoteBody} setIsWriting={() => {}}/>
                     <div className="column">
                         <div className="row center">
-                            <Fab color="primary" size="small" className="note-fab-right-down-center" onClick={() => props.editNote()} ><Save/></Fab>
+                            <Tooltip title="Save">
+                                <Fab color="primary" size="small" className="note-fab-right-down-center" onClick={() => props.editNote()} ><Save/></Fab>
+                            </Tooltip>
                         </div>
                         <div className="row end">
-                            <Fab color="secondary" size="small" className="note-fab-right-down-corner" onClick={() => props.deleteNote(props.noteId)} ><Delete/></Fab>
+                            <Tooltip title="Delete note">
+                                <Fab color="secondary" size="small" className="note-fab-right-down-corner" onClick={() => props.deleteNote(props.noteId)} ><Delete/></Fab>
+                            </Tooltip>
                         </div>
                     </div>
                 </Paper>

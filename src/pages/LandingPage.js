@@ -13,7 +13,7 @@ import { withFirebase } from '../provider/Firebase';
             <div className="row center max-width " style={{marginTop: '20px'}}>
                 <Paper className={`${Theme.flexContainer} ${Theme.titlePaper} title ` } elevation={3}>
                     <h1>Firekeep</h1>
-                    <h3>A simple <a href="https://keep.google.com" target="blank">keep.google.com</a> made in firebase</h3>
+                    <h3>A simple <a href="https://keep.google.com" target="blank">keep.google.com</a> made with firebase</h3>
                 </Paper>
             </div>
             <div className="row center">
