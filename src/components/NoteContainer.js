@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Paper, Fab, Menu, MenuItem } from '@material-ui/core';
+import { Paper, Fab, Menu, MenuItem, Tooltip } from '@material-ui/core';
 import { HookTheme } from '../constants/theme';
 import { MoreVert } from '@material-ui/icons';
 import { withFirebase } from '../provider/Firebase';
@@ -45,13 +45,16 @@ const NoteContainerBase = (props) =>{
 
     const editNote = (event) =>
     {
-        props.firebase.userNotes(props.firebase.auth.currentUser.uid).doc(props.note.id).update({title: noteTitle, body: noteBody}).then(
-            () => {
-                closeNote(null);
-            }
-        );
-
-        
+        //if the note is empty, delete it
+        if(noteTitle === '' && noteBody === ''){
+            deleteNote(props.note.id);
+        }else{
+            props.firebase.userNotes(props.firebase.auth.currentUser.uid).doc(props.note.id).update({title: noteTitle, body: noteBody}).then(
+                () => {
+                    closeNote(null);
+                }
+            );
+        }
     }
     return (
         <div key={props.key}>
@@ -70,7 +73,9 @@ const NoteContainerBase = (props) =>{
             </div>
             <div className={`note`} >
                 <Paper className={`${Theme.flexContainer} ${Theme.notePaper} column  note`} elevation={3}>
-                    <Fab  color="primary" size="small" className="note-fab-right-top-corner" onClick={openMenu}><MoreVert/></Fab>
+                    <Tooltip title="Close">
+                        <Fab  color="primary" size="small" className="note-fab-right-top-corner" onClick={openMenu}><MoreVert/></Fab>
+                    </Tooltip>
                     <Menu 
                     open={Boolean(anchorEl)}
                     anchorEl={anchorEl}
