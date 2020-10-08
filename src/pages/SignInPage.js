@@ -10,6 +10,7 @@ import { PasswordTextField } from '../components/PasswordTextField';
 import { SubmitButton } from '../components/SubmitButton';
 import { withAuthContext } from '../provider/Authentication';
 import { ContainerButton } from '../components/ContainerButton';
+import { IsoOutlined } from '@material-ui/icons';
 
 const SignInPageBase = (props) => {
     //hooks
@@ -31,8 +32,14 @@ const SignInPageBase = (props) => {
         
         return unsubFirebaseListener;
     },[])
+
+    const useDemoAccount = () => {
+        setEmailState({error: null, email:'test@test.com'});
+        setPassState({error: null, pass: '123456'});
+
+    }
     const signIn = (evt) => {
-        evt.preventDefault();
+        if(evt) evt.preventDefault();
 
         props.firebase.loginWithEmailPassword(emailState.email,passState.pass).then(
             async authUser => {
@@ -81,6 +88,7 @@ const SignInPageBase = (props) => {
                             </div>
                             <ContainerButton onClick={loginGoogle}><p>Log in with Google</p></ContainerButton>
                             <br/>
+                            <ContainerButton onClick={useDemoAccount} >Explore the App using the Demo Account</ContainerButton>
                     </Card>
                 
                 </div>

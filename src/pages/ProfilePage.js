@@ -41,6 +41,10 @@ const ProfilePageBase = (props) => {
 
     const handlePasswordChange = (evt) => {
         evt.preventDefault();
+        if(props.firebase.auth.currentUser.email === 'test@test.com'){
+            setOpenErrorSnackbar({open: true, error:'For testing purposes, you cannot change the password on the demo account'})
+            return;
+        }
         props.firebase.auth.currentUser.updatePassword(passState.pass).then(
             info => {
                 setOpenSuccessSnackbar(true);
@@ -270,7 +274,7 @@ const ProfilePageBase = (props) => {
             filesLimit={1}
             open={isDropZoneOpen}
             onSave={(files) => uploadProfilePicture(files)}
-            acceptedFiles={['image/jpeg', 'image.png']}
+            acceptedFiles={['image/jpeg', 'image/png']}
             showPreview={true}
             maxFileSize={5000000}
             onClose={() => setIsDropZoneOpen(false)}
