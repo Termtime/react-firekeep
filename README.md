@@ -2,9 +2,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### DEMO
 You can find a working demo of the app here: http://termtime-react-firekeep.surge.sh
 
-test user is "test@test.com"
-password is "123456"
-
 ### NOTE
 For the cloned version of the app to run, you need to create your own /src/constants/config.js file that contains all the constants used for the /src/providers/Firebase/FirebaseConfig.js configuration object.
 
