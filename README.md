@@ -2,7 +2,7 @@
 You can find a working demo of the app here: http://termtime-react-firekeep.surge.sh
 
 Notes page
-[alt text](https://i.imgur.com/7OwNcNz.jpg)
+![alt text](https://i.imgur.com/7OwNcNz.jpg)
 
 ### User Story
 The user can:
