@@ -1,10 +1,10 @@
-### DEMO
+## DEMO
 You can find a working demo of the app here: http://termtime-react-firekeep.surge.sh
 
 Notes page
 ![alt text](https://i.imgur.com/7OwNcNz.jpg)
 
-### User Story
+## User Story
 The user can:
 
 * Log in
@@ -16,7 +16,7 @@ The user can:
 * Change display name
 * Reset password
 
-### NOTE
+## NOTE
 For the cloned version of the app to run, you need to create your own /src/constants/config.js file that contains and exports all the constants used for the /src/providers/Firebase/FirebaseConfig.js configuration object.
 
 ## Running the app
